@@ -19,6 +19,7 @@ typedef struct Event {
     size_t eventNumCutScenes;
     int (*eventCondtion)(Player*);
     char* eventInfo;
+    float eventTimeout;
 } Event;
 
 #endif // !GAME_EVENT_H_

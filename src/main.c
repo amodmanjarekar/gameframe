@@ -1,11 +1,17 @@
+#include <raylib.h>
+#include <stdbool.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "./story.c"
 
-#define TOTAL_EVENTS 4
+#define TOTAL_EVENTS 5
+#define WIDTH 1024 * 1.5
+#define HEIGHT 900/2
 
 int main() {
+
+    SetTraceLogLevel(LOG_ERROR);
+    InitWindow(WIDTH, HEIGHT, "GAME");
 
     Player john = {
         .isEmployed = false,
@@ -18,11 +24,14 @@ int main() {
     updateEvent(eventline);
 
     int events_completed = 0;
-    int text_input = 0;
 
-    do {
+    while(!WindowShouldClose() && (events_completed < TOTAL_EVENTS)) {
 
-        do {
+        while(eventline[events_completed].eventCondtion(&john) != 1) {
+
+            ClearBackground(RAYWHITE);
+
+            BeginDrawing();
 
             switch (eventline[events_completed].eventType) {
 
@@ -30,25 +39,22 @@ int main() {
                     break;
 
                 case INFO:
-                    printf("%s\n", eventline[events_completed].eventInfo);
-                    scanf("%d", &text_input);
 
-                    if (text_input == 1) {
-                        john.isEmployed = true;
-                    }
-
-                    if (text_input == 100) {
-                        john.totalCash = 100;
-                    } 
-
-                    if (text_input == 200) {
-                        john.totalCash = 200;
-                    } 
+                    DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, BLACK);
+                    DrawText(eventline[events_completed].eventInfo, 20, HEIGHT-50, 30, WHITE);
 
                     break;
 
                 case UPDATE:
-                    printf("%s\n", eventline[events_completed].eventInfo);
+
+                    DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, PURPLE);
+                    DrawText(eventline[events_completed].eventInfo, 20, HEIGHT-50, 30, WHITE);
+                    if (eventline[events_completed].eventTimeout < 0) {
+                        eventline[events_completed].eventCondtion = eventTrueCondition;
+                    } else {
+                        eventline[events_completed].eventTimeout -= 0.009f;
+                    }
+
                     break;
 
                 default:
@@ -56,11 +62,29 @@ int main() {
 
             }
 
-        } while(eventline[events_completed].eventCondtion(&john) != 1);
+            if(IsKeyPressed(KEY_F)) {
+                john.isEmployed = true;
+            }
+
+            if(IsKeyPressed(KEY_G)) {
+                john.totalCash = 100;
+            }
+
+            if(IsKeyPressed(KEY_H)) {
+                john.totalCash = 200;
+            }
+
+            if(IsKeyPressed(KEY_J)) {
+                john.totalCash = 700;
+            }
+
+            EndDrawing();
+
+        }
 
         events_completed++;
 
-    } while(events_completed < TOTAL_EVENTS);
+    }
 
     free(eventline);
 
