@@ -64,4 +64,11 @@ void updateEvent(Event* eventline) {
     eventline[4].eventCondtion = event5Condition;
     eventline[4].eventTimeout = 0;
 
+    eventline[5].eventType = INFO;
+    eventline[5].eventCutScenes = NULL;
+    eventline[5].eventNumCutScenes = 0;
+    eventline[5].eventInfo = "";
+    eventline[5].eventCondtion = eventNullCondition;
+    eventline[5].eventTimeout = 0;
+
 }

@@ -1,0 +1,2 @@
+1) Specific event structs
+2) saving struct details to local vars for use instead of accesing the memory one by one

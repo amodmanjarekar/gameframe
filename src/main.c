@@ -4,7 +4,7 @@
 
 #include "./story.c"
 
-#define TOTAL_EVENTS 5
+#define TOTAL_EVENTS 6
 #define WIDTH 1024 * 1.5
 #define HEIGHT 900/2
 
@@ -49,6 +49,7 @@ int main() {
 
                     DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, PURPLE);
                     DrawText(eventline[events_completed].eventInfo, 20, HEIGHT-50, 30, WHITE);
+
                     if (eventline[events_completed].eventTimeout < 0) {
                         eventline[events_completed].eventCondtion = eventTrueCondition;
                     } else {
