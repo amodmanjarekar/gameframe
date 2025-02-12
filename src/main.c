@@ -1,12 +1,10 @@
-#include <raylib.h>
-#include <stdbool.h>
 #include <stdlib.h>
 
 #include "./story.c"
 
-#define TOTAL_EVENTS 6
-#define WIDTH 1024 * 1.5
-#define HEIGHT 900/2
+#define TOTAL_EVENTS 5
+#define WIDTH 1280
+#define HEIGHT 720
 
 int main() {
 
@@ -25,9 +23,9 @@ int main() {
 
     int events_completed = 0;
 
-    while(!WindowShouldClose() && (events_completed < TOTAL_EVENTS)) {
+    while(!WindowShouldClose()) {
 
-        while(eventline[events_completed].eventCondtion(&john) != 1) {
+        while(eventline[events_completed].eventCondtion(&john, eventline[events_completed].eventId) != 1) {
 
             ClearBackground(RAYWHITE);
 
@@ -41,14 +39,14 @@ int main() {
                 case INFO:
 
                     DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, BLACK);
-                    DrawText(eventline[events_completed].eventInfo, 20, HEIGHT-50, 30, WHITE);
+                    DrawText(eventline[events_completed].eventInfo.eventText, 20, HEIGHT-50, 30, WHITE);
 
                     break;
 
                 case UPDATE:
 
                     DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, PURPLE);
-                    DrawText(eventline[events_completed].eventInfo, 20, HEIGHT-50, 30, WHITE);
+                    DrawText(eventline[events_completed].eventInfo.eventText, 20, HEIGHT-50, 30, WHITE);
 
                     if (eventline[events_completed].eventTimeout < 0) {
                         eventline[events_completed].eventCondtion = eventTrueCondition;
@@ -59,6 +57,7 @@ int main() {
                     break;
 
                 default:
+
                     break;
 
             }
