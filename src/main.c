@@ -1,11 +1,5 @@
-#include <raylib.h>
-#include <stdlib.h>
-
 #include "./story.c"
-
-#define TOTAL_EVENTS 5
-#define WIDTH 1280
-#define HEIGHT 720
+#include "./button.c"
 
 int main() {
 
@@ -16,13 +10,27 @@ int main() {
         .isEmployed = false,
         .totalCash = 0,
         .hasItem = 0,
-    };
+    }; // LOAD FROM SAVE FILE
+
+    int events_completed = 0; // LOAD FROM SAVE FILE
 
     Event* eventline = (Event*) malloc(sizeof(Event) * TOTAL_EVENTS);
 
     updateEvent(eventline);
 
-    int events_completed = 0; // LOAD FROM SAVE FILE
+    Button home_continue_btn = {
+        .buttonType = HOMESCREEN,
+        .buttonRec.x = 100,
+        .buttonRec.y = 100,
+        .buttonRec.width = 145,
+        .buttonRec.height = 50,
+        .buttonBgColor = DARKGRAY,
+        .buttonTextColor = WHITE,
+        .buttonText = "CONTINUE",
+        .buttonID = 1
+    };
+
+    buttonClick(home_continue_btn);
 
     while(!WindowShouldClose()) {
 
@@ -30,15 +38,13 @@ int main() {
 
             ClearBackground(RAYWHITE);
 
-            BeginDrawing();
-
             handleEvent(eventline, events_completed);
-
             handleKey(GetKeyPressed(), &john);
 
-            if(IsKeyPressed(KEY_ESCAPE)) {
-                exit(0);
-            }
+            BeginDrawing();
+
+            drawButton(home_continue_btn);
+            buttonClick(home_continue_btn);
 
             EndDrawing();
 

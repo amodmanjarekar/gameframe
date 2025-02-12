@@ -1,5 +1,9 @@
+#include <stdlib.h>
+
 #include "../include/game_event.h"
 #include "../include/player.h"
+
+#define TOTAL_EVENTS 5
 
 #define WIDTH 1280
 #define HEIGHT 720
@@ -114,6 +118,8 @@ void handleKey(int key, Player* p) {
         case KEY_J:
             p->totalCash = 700;
             break;
+        case KEY_ESCAPE:
+            exit(0);
 
     }
 
