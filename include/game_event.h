@@ -33,30 +33,4 @@ typedef struct Event {
     };
 } Event;
 
-/* typedef struct InfoEvent { */
-/*     GameEvent eventType; */
-/*     int (*eventCondtion)(Player*); */
-/*     char* eventInfo; */
-/*     float eventTimeout; */
-/* } InfoEvent; */
-/*  */
-/* typedef struct CutSceneEvent { */
-/*     GameEvent eventType; */
-/*     Music eventMusic; */
-/*     Image* eventCutScenes; */
-/*     size_t eventNumCutScenes; */
-/*     int (*eventCondtion)(Player*); */
-/*     float eventTimeout; */
-/* } CutSceneEvent; */
-/*  */
-/* typedef struct Event { */
-/*     GameEvent eventType; */
-/*     Music eventMusic; */
-/*     Image* eventCutScenes; */
-/*     size_t eventNumCutScenes; */
-/*     int (*eventCondtion)(Player*); */
-/*     char* eventInfo; */
-/*     float eventTimeout; */
-/* } Event; */
-
 #endif // !GAME_EVENT_H_

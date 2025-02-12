@@ -1,6 +1,9 @@
 #include "../include/game_event.h"
 #include "../include/player.h"
 
+#define WIDTH 1280
+#define HEIGHT 720
+
 int eventNullCondition(Player* p, size_t eventId) {
     return 0;
 }
@@ -54,5 +57,64 @@ void updateEvent(Event* eventline) {
     eventline[4].eventTimeout = 0;
     eventline[4].eventInfo.eventText = "SIGMA SIGMA BOI";
     eventline[4].eventId = 5;
+
+}
+
+void handleEvent(Event* eventline, int events_completed) {
+
+    switch (eventline[events_completed].eventType) {
+
+        case CUTSCENE:
+            break;
+
+        case INFO:
+
+            DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, BLACK);
+            DrawText(eventline[events_completed].eventInfo.eventText, 20, HEIGHT-50, 30, WHITE);
+
+            break;
+
+        case UPDATE:
+
+            DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, PURPLE);
+            DrawText(eventline[events_completed].eventInfo.eventText, 20, HEIGHT-50, 30, WHITE);
+
+            if (eventline[events_completed].eventTimeout < 0) {
+                eventline[events_completed].eventCondtion = eventTrueCondition;
+            } else {
+                eventline[events_completed].eventTimeout -= 0.009f;
+            }
+
+            break;
+
+        default:
+
+            break;
+
+    }
+
+}
+
+void handleKey(int key, Player* p) {
+
+    switch(key) {
+
+        case KEY_F:
+            p->isEmployed = true;
+            break;
+
+        case KEY_G:
+            p->totalCash = 100;
+            break;
+
+        case KEY_H:
+            p->totalCash = 200;
+            break;
+
+        case KEY_J:
+            p->totalCash = 700;
+            break;
+
+    }
 
 }

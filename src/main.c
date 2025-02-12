@@ -1,3 +1,4 @@
+#include <raylib.h>
 #include <stdlib.h>
 
 #include "./story.c"
@@ -21,7 +22,7 @@ int main() {
 
     updateEvent(eventline);
 
-    int events_completed = 0;
+    int events_completed = 0; // LOAD FROM SAVE FILE
 
     while(!WindowShouldClose()) {
 
@@ -31,51 +32,12 @@ int main() {
 
             BeginDrawing();
 
-            switch (eventline[events_completed].eventType) {
+            handleEvent(eventline, events_completed);
 
-                case CUTSCENE:
-                    break;
+            handleKey(GetKeyPressed(), &john);
 
-                case INFO:
-
-                    DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, BLACK);
-                    DrawText(eventline[events_completed].eventInfo.eventText, 20, HEIGHT-50, 30, WHITE);
-
-                    break;
-
-                case UPDATE:
-
-                    DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, PURPLE);
-                    DrawText(eventline[events_completed].eventInfo.eventText, 20, HEIGHT-50, 30, WHITE);
-
-                    if (eventline[events_completed].eventTimeout < 0) {
-                        eventline[events_completed].eventCondtion = eventTrueCondition;
-                    } else {
-                        eventline[events_completed].eventTimeout -= 0.009f;
-                    }
-
-                    break;
-
-                default:
-
-                    break;
-
-            }
-
-            if(IsKeyPressed(KEY_F)) {
-                john.isEmployed = true;
-            }
-
-            if(IsKeyPressed(KEY_G)) {
-                john.totalCash = 100;
-            }
-
-            if(IsKeyPressed(KEY_H)) {
-                john.totalCash = 200;
-            }
-
-            if(IsKeyPressed(KEY_J)) {
-                john.totalCash = 700;
+            if(IsKeyPressed(KEY_ESCAPE)) {
+                exit(0);
             }
 
             EndDrawing();
