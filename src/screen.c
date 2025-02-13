@@ -36,5 +36,7 @@ void renderScreen(GameScreen **game_screen_stack, GameScreen **game_screen_ptr) 
         buttonClick((*game_screen_ptr)->arrayOfButtons[i]);
     } // RENDER BUTTONS
 
+    DrawTextureEx((*game_screen_ptr)->backgroundImage, (Vector2){200, 200}, 0.0f, 0.5f, WHITE);
+
 }
 

@@ -4,7 +4,6 @@
 
 #include "./screens/home_screen/home_screen.c"
 #include "./screens/options_screen/options_screen.c"
-#include <raylib.h>
 
 int main() {
 
@@ -32,6 +31,7 @@ int main() {
 
     defaultScreen(screenStack, home_screen);
     pushScreen(screenStack, &screenPtr, options_screen);
+    popScreen(screenStack, &screenPtr);
 
     //----------------------------------------
 

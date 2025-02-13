@@ -18,7 +18,6 @@ GameScreen* homeScreen() {
     gs->width = 1280;
     gs->height = 720;
     gs->screenType = HOMESCREEN;
-    gs->backgroundImage = NULL;
     gs->numButtons = 3;
     gs->arrayOfButtons[0] = home_continue_btn;
     gs->arrayOfButtons[1] = home_options_btn;

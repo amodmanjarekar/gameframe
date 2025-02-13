@@ -1,4 +1,5 @@
 #include "../../../include/screen.h"
+#include <raylib.h>
 
 GameScreen* optionsScreen() {
 
@@ -14,10 +15,10 @@ GameScreen* optionsScreen() {
 
     // TODO: home_continue_btn->buttonOnPress = pushScreen();
 
-    gs->width = 1280;
-    gs->height = 720;
+    gs->width = 1280/2;
+    gs->height = 720/2;
     gs->screenType = OPTIONSCREEN;
-    gs->backgroundImage = NULL;
+    gs->backgroundImage = LoadTexture("/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/options_screen/hk.png");
     gs->numButtons = 3;
     gs->arrayOfButtons[0] = options_continue_btn;
     gs->arrayOfButtons[1] = options_options_btn;

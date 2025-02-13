@@ -8,7 +8,7 @@ typedef struct GameScreen {
     int width;
     int height;
     SCREENTYPE screenType;
-    Image* backgroundImage;
+    Texture2D backgroundImage;
     Music track;
     size_t numButtons;
     Button* arrayOfButtons[];
