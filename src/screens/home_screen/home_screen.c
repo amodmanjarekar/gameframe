@@ -1,4 +1,4 @@
-#include "../../screen.c"
+#include "../../../include/screen.h"
 #include <stdlib.h>
 
 GameScreen* homeScreen() {
@@ -13,7 +13,7 @@ GameScreen* homeScreen() {
     getButton(home_options_btn, 100, 155, 145, 50, BLACK, WHITE, "OPTIONS", HOMESCREEN, 2);
     getButton(home_exit_btn, 100, 210, 145, 50, BLACK, WHITE, "EXIT", HOMESCREEN, 3);
 
-    // TODO: home_continue_btn->buttonOnPress = pushScreen();
+    // home_continue_btn->buttonOnPress = pushScreen();
 
     gs->width = 1280;
     gs->height = 720;

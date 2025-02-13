@@ -2,20 +2,20 @@
 
 #define SCREEN_LIMIT 5
 
-void pushScreen(GameScreen* game_screen_stack[], GameScreen** game_screen_ptr, GameScreen* new_game_screen) {
+void pushScreen(GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr, GameScreen* new_game_screen) {
 
-    if (game_screen_ptr >= game_screen_stack + SCREEN_LIMIT) {
+    if (*game_screen_ptr - game_screen_stack >= SCREEN_LIMIT - 1) {
         return;
     }
 
-    *game_screen_ptr = new_game_screen;
     (*game_screen_ptr)++;
+    **game_screen_ptr = new_game_screen;
 
 }
 
-void popScreen(GameScreen* game_screen_stack[], GameScreen** game_screen_ptr) {
+void popScreen(GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr) {
 
-    if(game_screen_ptr == game_screen_stack) {
+    if(*game_screen_ptr == game_screen_stack) {
         return;
     }
 

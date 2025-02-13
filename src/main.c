@@ -1,6 +1,10 @@
 #include "./story.c"
 #include "./button.c"
+#include "./screen.c"
+
 #include "./screens/home_screen/home_screen.c"
+#include "./screens/options_screen/options_screen.c"
+#include <raylib.h>
 
 int main() {
 
@@ -24,8 +28,10 @@ int main() {
     GameScreen** screenPtr = screenStack;
 
     GameScreen* home_screen = homeScreen();
+    GameScreen* options_screen = optionsScreen();
 
     defaultScreen(screenStack, home_screen);
+    pushScreen(screenStack, &screenPtr, options_screen);
 
     //----------------------------------------
 
