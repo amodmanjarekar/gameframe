@@ -1,5 +1,6 @@
 #include "./story.c"
 #include "./button.c"
+#include "./screens/home_screen/home_screen.c"
 
 int main() {
 
@@ -15,22 +16,18 @@ int main() {
     int events_completed = 0; // LOAD FROM SAVE FILE
 
     Event* eventline = (Event*) malloc(sizeof(Event) * TOTAL_EVENTS);
-
     updateEvent(eventline);
 
-    Button home_continue_btn = {
-        .buttonType = HOMESCREEN,
-        .buttonRec.x = 100,
-        .buttonRec.y = 100,
-        .buttonRec.width = 145,
-        .buttonRec.height = 50,
-        .buttonBgColor = DARKGRAY,
-        .buttonTextColor = WHITE,
-        .buttonText = "CONTINUE",
-        .buttonID = 1
-    };
+    //---------------------------------------- Select Screen //
 
-    buttonClick(home_continue_btn);
+    GameScreen* screenStack[SCREEN_LIMIT] = {0};
+    GameScreen** screenPtr = screenStack;
+
+    GameScreen* home_screen = homeScreen();
+
+    defaultScreen(screenStack, home_screen);
+
+    //----------------------------------------
 
     while(!WindowShouldClose()) {
 
@@ -43,8 +40,7 @@ int main() {
 
             BeginDrawing();
 
-            drawButton(home_continue_btn);
-            buttonClick(home_continue_btn);
+            renderScreen(screenStack, screenPtr);
 
             EndDrawing();
 
@@ -55,6 +51,7 @@ int main() {
     }
 
     free(eventline);
+    free(home_screen);
 
     return 0;
 
