@@ -29,14 +29,14 @@ void defaultScreen(GameScreen* game_screen_stack[], GameScreen* new_game_screen)
 
 }
 
-void renderScreen(GameScreen **game_screen_stack, GameScreen **game_screen_ptr) {
+void renderScreen(GameScreen **game_screen_stack, GameScreen ***game_screen_ptr, GameScreen* new_game_screen) {
 
-    for(size_t i = 0; i < (*game_screen_ptr)->numButtons; i++) {
-        drawButton((*game_screen_ptr)->arrayOfButtons[i]);
-        buttonClick((*game_screen_ptr)->arrayOfButtons[i]);
-    } // RENDER BUTTONS
+    for(size_t i = 0; i < (**game_screen_ptr)->numButtons; i++) {
+        drawButton((**game_screen_ptr)->arrayOfButtons[i]);
+        buttonClick((**game_screen_ptr)->arrayOfButtons[i], game_screen_stack, game_screen_ptr, new_game_screen);
+    }
 
-    DrawTextureEx((*game_screen_ptr)->backgroundImage, (Vector2){200, 200}, 0.0f, 0.5f, WHITE);
+    DrawTextureEx((**game_screen_ptr)->backgroundImage, (Vector2){200, 200}, 0.0f, 0.5f, WHITE);
 
 }
 

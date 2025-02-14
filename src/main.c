@@ -1,10 +1,8 @@
 #include "./story.c"
 #include "./button.c"
-#include "./screen.c"
 
 #include "./screens/home_screen/home_screen.c"
 #include "./screens/options_screen/options_screen.c"
-#include <string.h>
 
 int main() {
 
@@ -57,7 +55,7 @@ int main() {
 
             ClearBackground(RAYWHITE);
 
-            renderScreen(screenStack, screenPtr);
+            renderScreen(screenStack, &screenPtr, options_screen);
 
             EndDrawing();
 
@@ -69,6 +67,7 @@ int main() {
 
     free(eventline);
     free(home_screen);
+    CloseAudioDevice();
     // TODO: free GameScreens
 
     return 0;

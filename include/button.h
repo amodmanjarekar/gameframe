@@ -20,9 +20,11 @@ typedef struct Button {
     void (*buttonOnPress)();
 } Button;
 
-void handleMouseClick(Button* btn);
+typedef struct GameScreen GameScreen;
+
+void handleMouseClick(Button* btn, GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr, GameScreen* new_game_screen);
 void drawButton(Button* btn);
-void buttonClick(Button* btn);
+void buttonClick(Button* btn, GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr, GameScreen* new_game_screen);
 void getButton(Button *btn,
         int x, int y,
         int width, int height,

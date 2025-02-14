@@ -1,5 +1,8 @@
-#include "../include/button.h"
-#include <stdio.h>
+#include "./screen.c"
+
+extern GameScreen* game_screen;
+extern GameScreen* new_game_screen;
+extern GameScreen* options_screen;
 
 void getButton(
         Button *btn,
@@ -30,18 +33,64 @@ void drawButton(Button* btn) {
 
 }
 
-void buttonClick(Button* btn) {
+void buttonClick(Button* btn, GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr, GameScreen* new_game_screen) {
 
     Vector2 mouse = GetMousePosition();
 
     if (CheckCollisionPointRec(mouse, btn->buttonRec)) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            handleMouseClick(btn);
+            handleMouseClick(btn, game_screen_stack, game_screen_ptr, new_game_screen);
         }
     }
 
 }
 
-void handleMouseClick(Button* btn) {
-    printf("CLICKED %s\n", btn->buttonText);
+void handleMouseClick(Button* btn, GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr, GameScreen* new_game_screen) {
+
+    switch(btn->buttonType) {
+
+        case HOMESCREEN:
+
+            switch (btn->buttonID) {
+
+                case 1:
+                    break;
+
+                case 2:
+                    pushScreen(game_screen_stack, game_screen_ptr, new_game_screen);
+                    break;
+
+                case 3:
+                    break;
+            
+            }
+
+            break;
+
+        case GAMESCREEN:
+            break;
+
+        case GAMEPLAYSCREEN:
+            break;
+
+        case OPTIONSCREEN:
+
+            switch (btn->buttonID) {
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    popScreen(game_screen_stack, game_screen_ptr);
+                    break;
+            
+            }
+
+            break;
+
+    }
+
 }
