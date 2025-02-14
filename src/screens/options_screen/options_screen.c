@@ -19,10 +19,14 @@ GameScreen* optionsScreen() {
     gs->height = 720/2;
     gs->screenType = OPTIONSCREEN;
     gs->backgroundImage = LoadTexture("/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/options_screen/hk.png");
+    gs->trackPath = "/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/options_screen/Anime Villian.mp3";
     gs->numButtons = 3;
     gs->arrayOfButtons[0] = options_continue_btn;
     gs->arrayOfButtons[1] = options_options_btn;
     gs->arrayOfButtons[2] = options_exit_btn;
+
+    gs->track = LoadMusicStream(gs->trackPath);
+    PlayMusicStream(gs->track);
 
     return gs;
 

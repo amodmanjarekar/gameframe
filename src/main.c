@@ -4,11 +4,13 @@
 
 #include "./screens/home_screen/home_screen.c"
 #include "./screens/options_screen/options_screen.c"
+#include <string.h>
 
 int main() {
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(WIDTH, HEIGHT, "GAME");
+    InitAudioDevice();
 
     Player john = {
         .isEmployed = false,
@@ -30,8 +32,9 @@ int main() {
     GameScreen* options_screen = optionsScreen();
 
     defaultScreen(screenStack, home_screen);
-    pushScreen(screenStack, &screenPtr, options_screen);
-    popScreen(screenStack, &screenPtr);
+
+    /* pushScreen(screenStack, &screenPtr, options_screen); */
+    /* popScreen(screenStack, &screenPtr); */
 
     //----------------------------------------
 
@@ -39,12 +42,20 @@ int main() {
 
         while(eventline[events_completed].eventCondtion(&john, eventline[events_completed].eventId) != 1) {
 
-            ClearBackground(RAYWHITE);
+            UpdateMusicStream((*screenPtr)->track);
 
             handleEvent(eventline, events_completed);
             handleKey(GetKeyPressed(), &john);
 
+            if (IsKeyPressed(KEY_T)) {
+                pushScreen(screenStack, &screenPtr, options_screen);
+            } else if(IsKeyPressed(KEY_U)) {
+                popScreen(screenStack, &screenPtr);
+            }
+
             BeginDrawing();
+
+            ClearBackground(RAYWHITE);
 
             renderScreen(screenStack, screenPtr);
 
@@ -58,6 +69,7 @@ int main() {
 
     free(eventline);
     free(home_screen);
+    // TODO: free GameScreens
 
     return 0;
 

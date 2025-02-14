@@ -35,7 +35,7 @@ void updateEvent(Event* eventline) {
     eventline[0].eventType = INFO;
     eventline[0].eventCondtion = eventCondition;
     eventline[0].eventTimeout = 0;
-    eventline[0].eventInfo.eventText = "JOHN NEEDS TO GET A JOB!";
+    eventline[0].eventInfo.eventText = "GET A JOB!";
     eventline[0].eventId = 1;
 
     eventline[1].eventType = INFO;
@@ -59,7 +59,7 @@ void updateEvent(Event* eventline) {
     eventline[4].eventType = INFO;
     eventline[4].eventCondtion = eventCondition;
     eventline[4].eventTimeout = 0;
-    eventline[4].eventInfo.eventText = "SIGMA SIGMA BOI";
+    eventline[4].eventInfo.eventText = "LETSGOOOO!";
     eventline[4].eventId = 5;
 
 }
@@ -118,6 +118,7 @@ void handleKey(int key, Player* p) {
         case KEY_J:
             p->totalCash = 700;
             break;
+
         case KEY_ESCAPE:
             exit(0);
 
