@@ -120,6 +120,7 @@ void handleKey(int key, Player* p) {
             break;
 
         case KEY_ESCAPE:
+            // TODO: FREE FUNCTION CALL
             exit(0);
 
     }

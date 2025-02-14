@@ -31,6 +31,8 @@ int main() {
 
     defaultScreen(screenStack, home_screen);
 
+    setButtonTargetScreen(home_screen->arrayOfButtons[1], options_screen);
+
     /* pushScreen(screenStack, &screenPtr, options_screen); */
     /* popScreen(screenStack, &screenPtr); */
 
@@ -45,17 +47,17 @@ int main() {
             handleEvent(eventline, events_completed);
             handleKey(GetKeyPressed(), &john);
 
-            if (IsKeyPressed(KEY_T)) {
-                pushScreen(screenStack, &screenPtr, options_screen);
-            } else if(IsKeyPressed(KEY_U)) {
-                popScreen(screenStack, &screenPtr);
-            }
+            /* if (IsKeyPressed(KEY_T)) { */
+            /*     pushScreen(screenStack, &screenPtr, options_screen); */
+            /* } else if(IsKeyPressed(KEY_U)) { */
+            /*     popScreen(screenStack, &screenPtr); */
+            /* } */
 
             BeginDrawing();
 
             ClearBackground(RAYWHITE);
 
-            renderScreen(screenStack, &screenPtr, options_screen);
+            renderScreen(screenStack, &screenPtr);
 
             EndDrawing();
 
