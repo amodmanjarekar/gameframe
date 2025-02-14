@@ -9,17 +9,28 @@ typedef struct Player Player;
 typedef enum GameEvent {
     CUTSCENE,
     UPDATE,
-    INFO
+    INFO,
 } GameEvent;
+
+typedef struct CutsceneEvent {
+    Image* eventCutscenes;
+    Music eventBackgroundTrack;
+    size_t eventNumCutscenes;
+} CutsceneEvent;
+
+typedef struct InfoEvent {
+    char* eventText;
+} InfoEvent;
 
 typedef struct Event {
     GameEvent eventType;
-    Music eventMusic;
-    Image* eventCutScenes;
-    size_t eventNumCutScenes;
-    int (*eventCondtion)(Player*);
-    char* eventInfo;
+    int (*eventCondtion)(Player*, size_t);
     float eventTimeout;
+    size_t eventId;
+    union {
+        InfoEvent eventInfo;
+        CutsceneEvent eventCutscene;
+    };
 } Event;
 
 #endif // !GAME_EVENT_H_

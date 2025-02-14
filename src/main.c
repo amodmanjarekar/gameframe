@@ -1,83 +1,63 @@
-#include <raylib.h>
-#include <stdbool.h>
-#include <stdlib.h>
-
 #include "./story.c"
+#include "./button.c"
+#include "./screen.c"
 
-#define TOTAL_EVENTS 6
-#define WIDTH 1024 * 1.5
-#define HEIGHT 900/2
+#include "./screens/home_screen/home_screen.c"
+#include "./screens/options_screen/options_screen.c"
+#include <string.h>
 
 int main() {
 
     SetTraceLogLevel(LOG_ERROR);
     InitWindow(WIDTH, HEIGHT, "GAME");
+    InitAudioDevice();
 
     Player john = {
         .isEmployed = false,
         .totalCash = 0,
         .hasItem = 0,
-    };
+    }; // LOAD FROM SAVE FILE
+
+    int events_completed = 0; // LOAD FROM SAVE FILE
 
     Event* eventline = (Event*) malloc(sizeof(Event) * TOTAL_EVENTS);
-
     updateEvent(eventline);
 
-    int events_completed = 0;
+    //---------------------------------------- Select Screen //
 
-    while(!WindowShouldClose() && (events_completed < TOTAL_EVENTS)) {
+    GameScreen* screenStack[SCREEN_LIMIT] = {0};
+    GameScreen** screenPtr = screenStack;
 
-        while(eventline[events_completed].eventCondtion(&john) != 1) {
+    GameScreen* home_screen = homeScreen();
+    GameScreen* options_screen = optionsScreen();
 
-            ClearBackground(RAYWHITE);
+    defaultScreen(screenStack, home_screen);
+
+    /* pushScreen(screenStack, &screenPtr, options_screen); */
+    /* popScreen(screenStack, &screenPtr); */
+
+    //----------------------------------------
+
+    while(!WindowShouldClose()) {
+
+        while(eventline[events_completed].eventCondtion(&john, eventline[events_completed].eventId) != 1) {
+
+            UpdateMusicStream((*screenPtr)->track);
+
+            handleEvent(eventline, events_completed);
+            handleKey(GetKeyPressed(), &john);
+
+            if (IsKeyPressed(KEY_T)) {
+                pushScreen(screenStack, &screenPtr, options_screen);
+            } else if(IsKeyPressed(KEY_U)) {
+                popScreen(screenStack, &screenPtr);
+            }
 
             BeginDrawing();
 
-            switch (eventline[events_completed].eventType) {
+            ClearBackground(RAYWHITE);
 
-                case CUTSCENE:
-                    break;
-
-                case INFO:
-
-                    DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, BLACK);
-                    DrawText(eventline[events_completed].eventInfo, 20, HEIGHT-50, 30, WHITE);
-
-                    break;
-
-                case UPDATE:
-
-                    DrawRectangle(10, HEIGHT-60, WIDTH-20, 50, PURPLE);
-                    DrawText(eventline[events_completed].eventInfo, 20, HEIGHT-50, 30, WHITE);
-
-                    if (eventline[events_completed].eventTimeout < 0) {
-                        eventline[events_completed].eventCondtion = eventTrueCondition;
-                    } else {
-                        eventline[events_completed].eventTimeout -= 0.009f;
-                    }
-
-                    break;
-
-                default:
-                    break;
-
-            }
-
-            if(IsKeyPressed(KEY_F)) {
-                john.isEmployed = true;
-            }
-
-            if(IsKeyPressed(KEY_G)) {
-                john.totalCash = 100;
-            }
-
-            if(IsKeyPressed(KEY_H)) {
-                john.totalCash = 200;
-            }
-
-            if(IsKeyPressed(KEY_J)) {
-                john.totalCash = 700;
-            }
+            renderScreen(screenStack, screenPtr);
 
             EndDrawing();
 
@@ -88,6 +68,8 @@ int main() {
     }
 
     free(eventline);
+    free(home_screen);
+    // TODO: free GameScreens
 
     return 0;
 
