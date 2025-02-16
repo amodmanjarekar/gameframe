@@ -1,5 +1,4 @@
 #include "./screen.c"
-#include <stdio.h>
 
 void getButton(
         Button *btn,
@@ -79,6 +78,23 @@ void handleMouseClick(Button* btn, GameScreen **game_screen_stack, GameScreen **
             break;
 
         case OPTIONSCREEN:
+
+            switch (btn->buttonID) {
+
+                case 1:
+                    break;
+
+                case 2:
+                    pushScreen(game_screen_stack, game_screen_ptr, btn->buttonTargetScreen);
+                    break;
+
+                case 3:
+                    popScreen(game_screen_stack, game_screen_ptr);
+                    break;
+            
+            }
+
+        case CONTROLSCREEN:
 
             switch (btn->buttonID) {
 

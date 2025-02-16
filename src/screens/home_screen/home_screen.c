@@ -1,5 +1,6 @@
 #include "../../../include/screen.h"
-#include <stdlib.h>
+#include <stdio.h>
+#include <raylib.h>
 
 GameScreen* homeScreen() {
 
@@ -24,6 +25,7 @@ GameScreen* homeScreen() {
     gs->arrayOfButtons[0] = home_continue_btn;
     gs->arrayOfButtons[1] = home_options_btn;
     gs->arrayOfButtons[2] = home_exit_btn;
+    printf("%s\n", GetWorkingDirectory());
 
     gs->track = LoadMusicStream(gs->trackPath);
     PlayMusicStream(gs->track);
