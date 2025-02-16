@@ -9,7 +9,8 @@ typedef enum SCREENTYPE {
     HOMESCREEN,
     GAMESCREEN,
     GAMEPLAYSCREEN,
-    OPTIONSCREEN
+    OPTIONSCREEN,
+    CONTROLSCREEN
 } SCREENTYPE;
 
 typedef struct Button {

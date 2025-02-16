@@ -3,6 +3,7 @@
 
 #include "./screens/home_screen/home_screen.c"
 #include "./screens/options_screen/options_screen.c"
+#include "./screens/controls_screen/control_screen.c"
 
 int main() {
 
@@ -28,13 +29,12 @@ int main() {
 
     GameScreen* home_screen = homeScreen();
     GameScreen* options_screen = optionsScreen();
+    GameScreen* control_screen = controlsScreen();
 
     defaultScreen(screenStack, home_screen);
 
     setButtonTargetScreen(home_screen->arrayOfButtons[1], options_screen);
-
-    /* pushScreen(screenStack, &screenPtr, options_screen); */
-    /* popScreen(screenStack, &screenPtr); */
+    setButtonTargetScreen(options_screen->arrayOfButtons[1], control_screen);
 
     //----------------------------------------
 
@@ -46,12 +46,6 @@ int main() {
 
             handleEvent(eventline, events_completed);
             handleKey(GetKeyPressed(), &john);
-
-            /* if (IsKeyPressed(KEY_T)) { */
-            /*     pushScreen(screenStack, &screenPtr, options_screen); */
-            /* } else if(IsKeyPressed(KEY_U)) { */
-            /*     popScreen(screenStack, &screenPtr); */
-            /* } */
 
             BeginDrawing();
 
