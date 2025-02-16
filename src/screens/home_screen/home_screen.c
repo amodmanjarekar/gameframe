@@ -13,14 +13,14 @@ GameScreen* homeScreen() {
     getButton(home_options_btn, 100, 155, 145, 50, BLACK, WHITE, "OPTIONS", HOMESCREEN, 2);
     getButton(home_exit_btn, 100, 210, 145, 50, BLACK, WHITE, "EXIT", HOMESCREEN, 3);
 
-    // home_continue_btn->buttonOnPress = pushScreen();
+    // TODO: home_continue_btn->buttonOnPress = pushScreen();
 
     gs->width = 1280;
     gs->height = 720;
     gs->screenType = HOMESCREEN;
-    gs->numButtons = 3;
     gs->backgroundImage = LoadTexture("/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/home_screen/sans.png");
     gs->trackPath = "/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/home_screen/home_track.mp3";
+    gs->numButtons = 3;
     gs->arrayOfButtons[0] = home_continue_btn;
     gs->arrayOfButtons[1] = home_options_btn;
     gs->arrayOfButtons[2] = home_exit_btn;

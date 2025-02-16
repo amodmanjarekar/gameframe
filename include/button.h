@@ -3,6 +3,8 @@
 
 #include <raylib.h>
 
+typedef struct GameScreen GameScreen;
+
 typedef enum SCREENTYPE {
     HOMESCREEN,
     GAMESCREEN,
@@ -17,12 +19,16 @@ typedef struct Button {
     char* buttonText;
     SCREENTYPE buttonType;
     int buttonID;
+    GameScreen* buttonTargetScreen;
     void (*buttonOnPress)();
 } Button;
 
-void handleMouseClick(Button* btn);
+typedef struct GameScreen GameScreen;
+
+void handleMouseClick(Button* btn, GameScreen **game_screen_stack, GameScreen ***game_screen_ptr);
 void drawButton(Button* btn);
-void buttonClick(Button* btn);
+void buttonClick(Button* btn, GameScreen **game_screen_stack, GameScreen ***game_screen_ptr);
+void setButtonTargetScreen(Button* btn, GameScreen* targetScreen);
 void getButton(Button *btn,
         int x, int y,
         int width, int height,

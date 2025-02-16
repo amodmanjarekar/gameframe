@@ -1,10 +1,8 @@
 #include "./story.c"
 #include "./button.c"
-#include "./screen.c"
 
 #include "./screens/home_screen/home_screen.c"
 #include "./screens/options_screen/options_screen.c"
-#include <string.h>
 
 int main() {
 
@@ -33,6 +31,8 @@ int main() {
 
     defaultScreen(screenStack, home_screen);
 
+    setButtonTargetScreen(home_screen->arrayOfButtons[1], options_screen);
+
     /* pushScreen(screenStack, &screenPtr, options_screen); */
     /* popScreen(screenStack, &screenPtr); */
 
@@ -47,17 +47,17 @@ int main() {
             handleEvent(eventline, events_completed);
             handleKey(GetKeyPressed(), &john);
 
-            if (IsKeyPressed(KEY_T)) {
-                pushScreen(screenStack, &screenPtr, options_screen);
-            } else if(IsKeyPressed(KEY_U)) {
-                popScreen(screenStack, &screenPtr);
-            }
+            /* if (IsKeyPressed(KEY_T)) { */
+            /*     pushScreen(screenStack, &screenPtr, options_screen); */
+            /* } else if(IsKeyPressed(KEY_U)) { */
+            /*     popScreen(screenStack, &screenPtr); */
+            /* } */
 
             BeginDrawing();
 
             ClearBackground(RAYWHITE);
 
-            renderScreen(screenStack, screenPtr);
+            renderScreen(screenStack, &screenPtr);
 
             EndDrawing();
 
@@ -69,6 +69,7 @@ int main() {
 
     free(eventline);
     free(home_screen);
+    CloseAudioDevice();
     // TODO: free GameScreens
 
     return 0;

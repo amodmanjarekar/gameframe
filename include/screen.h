@@ -18,6 +18,6 @@ typedef struct GameScreen {
 void pushScreen(GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr, GameScreen* new_game_screen);
 void popScreen(GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr);
 void defaultScreen(GameScreen* game_screen_stack[], GameScreen* new_game_screen);
-void renderScreen(GameScreen* game_screen_stack[], GameScreen** game_screen_ptr);
+void renderScreen(GameScreen* game_screen_stack[], GameScreen*** game_screen_ptr);
 
 #endif // !SCREEN_H_
