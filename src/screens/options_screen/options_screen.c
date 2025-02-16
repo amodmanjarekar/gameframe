@@ -1,6 +1,10 @@
 #include "../../../include/screen.h"
+#include "../../../include/utils.h"
 
 GameScreen* optionsScreen() {
+
+    char* track_path = getFilePath("/src/screens/options_screen/charming.mp3");
+    char* background_path = getFilePath("/src/screens/options_screen/hk.png");
 
     GameScreen* gs = (GameScreen*) malloc(sizeof(GameScreen) + 3 * sizeof(Button*));
 
@@ -17,8 +21,8 @@ GameScreen* optionsScreen() {
     gs->width = 1280;
     gs->height = 720;
     gs->screenType = OPTIONSCREEN;
-    gs->backgroundImage = LoadTexture("/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/options_screen/hk.png");
-    gs->trackPath = "/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/options_screen/Anime Villian.mp3";
+    gs->backgroundImage = LoadTexture(background_path);
+    gs->trackPath = track_path;
     gs->numButtons = 3;
     gs->arrayOfButtons[0] = options_volume_btn;
     gs->arrayOfButtons[1] = options_control_btn;
