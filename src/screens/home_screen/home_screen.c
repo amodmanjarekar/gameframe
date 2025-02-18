@@ -1,8 +1,10 @@
 #include "../../../include/screen.h"
-#include <stdio.h>
-#include <raylib.h>
+#include "../../../include/utils.h"
 
 GameScreen* homeScreen() {
+    
+    char* track_path = getFilePath("/src/screens/home_screen/home_track.mp3");
+    char* background_path = getFilePath("/src/screens/home_screen/sans.png");
 
     GameScreen* gs = (GameScreen*) malloc(sizeof(GameScreen) + 3 * sizeof(Button*));
 
@@ -19,13 +21,12 @@ GameScreen* homeScreen() {
     gs->width = 1280;
     gs->height = 720;
     gs->screenType = HOMESCREEN;
-    gs->backgroundImage = LoadTexture("/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/home_screen/sans.png");
-    gs->trackPath = "/home/arhant/Sandbox/c/tryhere/gameframe/src/screens/home_screen/home_track.mp3";
+    gs->backgroundImage = LoadTexture(background_path);
+    gs->trackPath = track_path;
     gs->numButtons = 3;
     gs->arrayOfButtons[0] = home_continue_btn;
     gs->arrayOfButtons[1] = home_options_btn;
     gs->arrayOfButtons[2] = home_exit_btn;
-    printf("%s\n", GetWorkingDirectory());
 
     gs->track = LoadMusicStream(gs->trackPath);
     PlayMusicStream(gs->track);

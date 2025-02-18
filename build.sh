@@ -1,3 +1,3 @@
 #!/bin/sh
 
-gcc ./src/main.c -o main -lraylib -lm
+gcc ./src/main.c ./src/utils.c -o main -lraylib
